@@ -12,7 +12,7 @@ namespace TickManager
     public class TickClock
     {
         /// <summary>
-        /// The ammount of ticks a millisecond has
+        /// Microseconds to milliseconds constant helper
         /// </summary>
         internal const double TicksPerMillisecond = 10000;
 
