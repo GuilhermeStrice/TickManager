@@ -57,11 +57,11 @@ namespace TickManager
         /// <returns>Whether the application should process the next tick or not</returns>
         public bool CanTick()
         {
-            double internalMspt = tc.Tick();
-            bool canTick = internalMspt > msptInternal;
+            double tickTime = tc.Tick();
+            bool canTick = tickTime > msptInternal;
             if (canTick)
             {
-                MSPT = internalMspt;
+                MSPT = tickTime;
                 tc.Reset();
             }
             return canTick;
