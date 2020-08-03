@@ -4,6 +4,8 @@ using System.Text;
 
 namespace TickManager
 {
+    public delegate void Tick();
+
     /// <summary>
     /// Handles ticking for an application
     /// </summary>
@@ -23,6 +25,20 @@ namespace TickManager
         /// Tick clock object
         /// </summary>
         internal TickClock tc = new TickClock();
+
+        /// <summary>
+        /// Event that gets called every time it ticks
+        /// </summary>
+        public event Tick OnTick;
+
+        /// <summary>
+        /// Used to run in a loop. Invokes the OnTick event
+        /// </summary>
+        public void Tick()
+        {
+            if (CanTick())
+                OnTick?.Invoke();
+        }
 
         /// <summary>
         /// The frequency your application will tick
@@ -55,7 +71,7 @@ namespace TickManager
         /// Checks if the application can process the same tick relative to the frequency set
         /// </summary>
         /// <returns>Whether the application should process the next tick or not</returns>
-        public bool CanTick()
+        internal bool CanTick()
         {
             double tickTime = tc.Tick();
             bool canTick = tickTime > msptInternal;
